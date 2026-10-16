@@ -2,7 +2,7 @@
 
 class ToDoConsoleApp
 {
-    public static List<Task> Tasks { get; set; } = [];
+    public static List<TaskItem> Tasks { get; set; } = [];
 
     static void Main (string[] args)
     {
@@ -21,28 +21,25 @@ class ToDoConsoleApp
 
             option = Console.ReadLine();
 
-            switch (option)
+            switch (option.ToLower())
             {
                 case "1":
-                    Task.AddTask(Tasks);
+                    TaskItem.AddTask(Tasks);
 
                     break;
                 case "2":
-                    Task.CompletTask(Tasks);
+                    TaskItem.CompleteTask(Tasks);
 
                     break; 
                 case "3":
-                    Task.RemoveTask(Tasks);
+                    TaskItem.RemoveTask(Tasks);
 
                     break; 
                 case "4":
-                    Task.DisplayTasks(Tasks);
+                    TaskItem.DisplayTasks(Tasks);
 
                     break; 
                 case "e":
-                    Console.WriteLine("Exit program.");
-                    break;
-                case "E":
                     Console.WriteLine("Exit program.");
                     break;
                 default:
