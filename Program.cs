@@ -2,7 +2,7 @@
 
 class ToDoConsoleApp
 {
-    public static List<string> Tasks { get; set; } = new List<string>();
+    public static List<Task> Tasks { get; set; } = [];
 
     static void Main (string[] args)
     {
@@ -29,7 +29,8 @@ class ToDoConsoleApp
                     string? userTask = Console.ReadLine();
                     if (!String.IsNullOrWhiteSpace(userTask))
                     {
-                        Tasks.Add(userTask);
+                        Task task = new(userTask, false);
+                        Tasks.Add(task);
                     }
 
                     break;
@@ -41,7 +42,7 @@ class ToDoConsoleApp
                     int taskNumber = UserChoice(Console.ReadLine());
                     if (taskNumber != -1)
                     {
-                        Tasks[taskNumber] = $"~{Tasks[taskNumber]}~";
+                        Tasks[taskNumber].State = true;
                     } 
                     else
                     {
@@ -77,7 +78,14 @@ class ToDoConsoleApp
                     
                     foreach (var item in Tasks)
                     {
-                        Console.WriteLine(item);
+                        if (!item.State)
+                        {
+                            Console.WriteLine($"[ ] {item.Title}");
+                        } 
+                        else
+                        {
+                            Console.WriteLine($"[X] {item.Title}");
+                        }
                     }
 
                     break; 
@@ -118,7 +126,7 @@ class ToDoConsoleApp
     {
         for (int i = 0; i < Tasks.Count; i++)
         {
-            Console.WriteLine($"{i} : {Tasks[i]}");
+            Console.WriteLine($"{i} : {Tasks[i].Title}");
         }
     }
 }
