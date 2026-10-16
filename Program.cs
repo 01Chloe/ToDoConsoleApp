@@ -10,14 +10,14 @@ class ToDoConsoleApp
         Console.WriteLine("Choose an action, then press enter :");
 
         string? option = "";
-        while (option != "e")
+        while (option != "e" && option != "E")
         {
             Console.WriteLine();
-            Console.WriteLine("*1 : Add a task.");
-            Console.WriteLine("*2 : Complete a task.");
-            Console.WriteLine("*3 : Remove a task.");
-            Console.WriteLine("*4 : View all tasks.");
-            Console.WriteLine("*e : Exit the program.");
+            Console.WriteLine("- 1 : Add a task.");
+            Console.WriteLine("- 2 : Complete a task.");
+            Console.WriteLine("- 3 : Remove a task.");
+            Console.WriteLine("- 4 : View all tasks.");
+            Console.WriteLine("- e or E : Exit the program.");
 
             option = Console.ReadLine();
 
@@ -27,7 +27,7 @@ class ToDoConsoleApp
                     Console.WriteLine("Enter your new task : ");
                     
                     string? userTask = Console.ReadLine();
-                    if (userTask != null)
+                    if (!String.IsNullOrWhiteSpace(userTask))
                     {
                         Tasks.Add(userTask);
                     }
@@ -84,6 +84,9 @@ class ToDoConsoleApp
                 case "e":
                     Console.WriteLine("Exit program.");
                     break;
+                case "E":
+                    Console.WriteLine("Exit program.");
+                    break;
                 default:
                     Console.WriteLine("Please choose a valid option.");
                     break;
@@ -93,10 +96,18 @@ class ToDoConsoleApp
 
     private static int UserChoice(string? userChoice)
     {
-        if(userChoice != null && Convert.ToInt32(userChoice) < Tasks.Count)
+        bool successfullyParsed = int.TryParse(userChoice, out _);
+        if (userChoice != null && successfullyParsed)
         {
-            return Convert.ToInt32(userChoice);
-        } 
+            if(Convert.ToInt32(userChoice) < Tasks.Count)
+            {
+                return Convert.ToInt32(userChoice);
+            } 
+            else
+            {
+                return -1;
+            }
+        }
         else
         {
             return -1;
