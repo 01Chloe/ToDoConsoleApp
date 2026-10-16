@@ -21,7 +21,7 @@ class ToDoConsoleApp
 
             option = Console.ReadLine();
 
-            switch (option.ToLower())
+            switch (option?.ToLower())
             {
                 case "1":
                     TaskItem.AddTask(Tasks);

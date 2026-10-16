@@ -74,7 +74,7 @@ internal class TaskItem(string title, bool isDone)
 
     private static bool UserChoice(string? userChoice, List<TaskItem> Tasks, out int result)
     {
-        return int.TryParse(userChoice, out result) && result < Tasks.Count && result > 0;
+        return int.TryParse(userChoice, out result) && result < Tasks.Count && result >= 0;
     }
 
     private static void LoopOverListOfTasks(List<TaskItem> Tasks)
