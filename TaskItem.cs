@@ -1,6 +1,6 @@
 ﻿namespace ToDoConsoleApp;
 
-internal class TaskItem(string title, bool isDone)
+class TaskItem(string title, bool isDone)
 {
     public string Title { get; set; } = title;
     public bool IsDone { get; set; } = isDone; 
