@@ -28,11 +28,15 @@ class DisplayTasks (TaskService taskService)
 
                     break;
                 case "4":
-                    Display();
+                    Display(taskService.Tasks);
 
                     break;
                 case "5":
                     UncompleteTask();
+
+                    break;
+                case "6":
+                    Display(taskService.GetPendingTasks());
 
                     break;
                 case "e":
@@ -53,6 +57,7 @@ class DisplayTasks (TaskService taskService)
         Console.WriteLine("- 3 : Remove a task.");
         Console.WriteLine("- 4 : View all tasks.");
         Console.WriteLine("- 5 : Uncomplete a task.");
+        Console.WriteLine("- 6 : View pending tasks.");
         Console.WriteLine("- e or E : Exit the program.");
     }
 
@@ -115,11 +120,9 @@ class DisplayTasks (TaskService taskService)
         }
     }
 
-    private void Display()
+    private static void Display(IEnumerable<TaskItem> tasks)
     {
-        List<TaskItem> tasks = taskService.Tasks;
-
-        if (tasks.Count == 0)
+        if (!tasks.Any())
         {
             Console.WriteLine("Your list is empty");
         }
@@ -130,14 +133,8 @@ class DisplayTasks (TaskService taskService)
 
         foreach (var item in tasks)
         {
-            if (!item.IsDone)
-            {
-                Console.WriteLine($"[ ] {item.Title}");
-            }
-            else
-            {
-                Console.WriteLine($"[X] {item.Title}");
-            }
+            string box = item.IsDone ? "[X]" : "[ ]";
+            Console.WriteLine($"{box} {item.Title}");
         }
     }
 

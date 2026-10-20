@@ -49,4 +49,9 @@ class TaskService
         Tasks.RemoveAt(index);
         return true;
     }
+
+    public List<TaskItem> GetPendingTasks()
+    {
+        return [.. Tasks.Where(task => !task.IsDone)];
+    }
 }
