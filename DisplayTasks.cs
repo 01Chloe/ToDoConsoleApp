@@ -31,6 +31,10 @@ class DisplayTasks (TaskService taskService)
                     Display();
 
                     break;
+                case "5":
+                    UncompleteTask();
+
+                    break;
                 case "e":
                     Console.WriteLine("Exit program.");
                     break;
@@ -48,6 +52,7 @@ class DisplayTasks (TaskService taskService)
         Console.WriteLine("- 2 : Complete a task.");
         Console.WriteLine("- 3 : Remove a task.");
         Console.WriteLine("- 4 : View all tasks.");
+        Console.WriteLine("- 5 : Uncomplete a task.");
         Console.WriteLine("- e or E : Exit the program.");
     }
 
@@ -71,6 +76,22 @@ class DisplayTasks (TaskService taskService)
         if (UserChoice(Console.ReadLine(), taskService.Tasks, out int index))
         {
             taskService.Complete(index);
+        }
+        else
+        {
+            Console.WriteLine("Please choose a number in the list");
+        }
+    }
+
+    private void UncompleteTask()
+    {
+        Console.WriteLine("Enter the number of the task you want to uncomplete :");
+
+        LoopOverListOfTasks();
+
+        if (UserChoice(Console.ReadLine(), taskService.Tasks, out int index))
+        {
+            taskService.Uncomplete(index);
         }
         else
         {

@@ -28,6 +28,17 @@ class TaskService
         return true;
     }
 
+    public bool Uncomplete(int index)
+    {
+        if (!IsValidIndex(index))
+        {
+            return false;
+        }
+
+        Tasks[index].IsDone = false;
+        return true;
+    }
+
     public bool Remove(int index)
     {
         if (!IsValidIndex(index))
