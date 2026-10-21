@@ -120,7 +120,7 @@ class DisplayTasks (TaskService taskService)
         }
     }
 
-    private static void Display(IEnumerable<TaskItem> tasks)
+    private void Display(IEnumerable<TaskItem> tasks)
     {
         if (!tasks.Any())
         {
@@ -136,6 +136,7 @@ class DisplayTasks (TaskService taskService)
             string box = item.IsDone ? "[X]" : "[ ]";
             Console.WriteLine($"{box} {item.Title}");
         }
+        Console.WriteLine($"{taskService.GetDoneTaskCount()} tasks completed out of {tasks.Count()}");
     }
 
     private void LoopOverListOfTasks()

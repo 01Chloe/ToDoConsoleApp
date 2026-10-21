@@ -54,4 +54,9 @@ class TaskService
     {
         return [.. Tasks.Where(task => !task.IsDone)];
     }
+
+    public int GetDoneTaskCount()
+    {
+        return Tasks.Count(task => task.IsDone);
+    }
 }
