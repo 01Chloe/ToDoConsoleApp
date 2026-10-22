@@ -39,6 +39,10 @@ class DisplayTasks (TaskService taskService)
                     Display(taskService.GetPendingTasks());
 
                     break;
+                case "7":
+                    SearchTask();
+
+                    break;
                 case "e":
                     Console.WriteLine("Exit program.");
                     break;
@@ -58,6 +62,7 @@ class DisplayTasks (TaskService taskService)
         Console.WriteLine("- 4 : View all tasks.");
         Console.WriteLine("- 5 : Uncomplete a task.");
         Console.WriteLine("- 6 : View pending tasks.");
+        Console.WriteLine("- 7 : Looking for a task.");
         Console.WriteLine("- e or E : Exit the program.");
     }
 
@@ -137,6 +142,24 @@ class DisplayTasks (TaskService taskService)
             Console.WriteLine($"{box} {item.Title}");
         }
         Console.WriteLine($"{taskService.GetDoneTaskCount()} tasks completed out of {tasks.Count()}");
+    }
+
+    private void SearchTask()
+    {
+        Console.WriteLine("Task sought : ");
+
+        string? userTaskSearch = Console.ReadLine();
+
+        if (userTaskSearch != null)
+        {
+            List<TaskItem> taskSought = taskService.Search(userTaskSearch);
+
+            Console.WriteLine("There is your task : ");
+            foreach (TaskItem item in taskSought)
+            {
+                Console.WriteLine(item.Title);
+            }
+        }
     }
 
     private void LoopOverListOfTasks()

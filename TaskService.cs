@@ -59,4 +59,9 @@ class TaskService
     {
         return Tasks.Count(task => task.IsDone);
     }
+
+    public List<TaskItem> Search(string taskSought)
+    {
+        return [.. Tasks.Where(task => task.Title.Contains(taskSought))];
+    }
 }
