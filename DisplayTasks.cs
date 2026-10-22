@@ -154,7 +154,7 @@ class DisplayTasks (TaskService taskService)
         {
             List<TaskItem> taskSought = taskService.Search(userTaskSearch);
 
-            Console.WriteLine("There is your task : ");
+            Console.WriteLine("Your tasks : ");
             foreach (TaskItem item in taskSought)
             {
                 Console.WriteLine(item.Title);

@@ -62,6 +62,6 @@ class TaskService
 
     public List<TaskItem> Search(string taskSought)
     {
-        return [.. Tasks.Where(task => task.Title.Contains(taskSought))];
+        return [.. Tasks.Where(task => task.Title.Contains(taskSought, StringComparison.CurrentCultureIgnoreCase))];
     }
 }
