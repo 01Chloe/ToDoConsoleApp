@@ -4,7 +4,8 @@ class ToDoConsoleApp
 {
     static void Main (string[] args)
     {
-        TaskService taskService = new();
+        TaskStorage taskStorage = new();
+        TaskService taskService = new(taskStorage);
         DisplayTasks displayTasks = new(taskService);
 
         displayTasks.Run();

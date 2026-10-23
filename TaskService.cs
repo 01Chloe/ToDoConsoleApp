@@ -1,8 +1,8 @@
 ﻿namespace ToDoConsoleApp;
 
-class TaskService
+class TaskService(TaskStorage taskStorage)
 {
-    public List<TaskItem> Tasks { get; set; } = [];
+    public List<TaskItem> Tasks { get; set; } = taskStorage.Load();
 
     private bool IsValidIndex(int index) => index >= 0 && index < Tasks.Count;
 
@@ -14,6 +14,7 @@ class TaskService
         }
         TaskItem task = new(title, false);
         Tasks.Add(task);
+        taskStorage.Save(Tasks);
         return true;
     }
 
@@ -25,6 +26,7 @@ class TaskService
         }
 
         Tasks[index].IsDone = true;
+        taskStorage.Save(Tasks);
         return true;
     }
 
@@ -36,6 +38,7 @@ class TaskService
         }
 
         Tasks[index].IsDone = false;
+        taskStorage.Save(Tasks);
         return true;
     }
 
@@ -47,6 +50,7 @@ class TaskService
         }
 
         Tasks.RemoveAt(index);
+        taskStorage.Save(Tasks);
         return true;
     }
 
